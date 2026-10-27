@@ -39,6 +39,10 @@ ul{padding-left:20px}.tl{list-style:none;padding:0;margin:6px 0 12px}.tl li{padd
 .pbar i{display:block;height:100%;background:var(--g)}
 .nav2{display:flex;justify-content:space-between;margin-top:20px;gap:10px;flex-wrap:wrap}
 footer{text-align:center;font-size:13px;color:#4a6656;padding:20px}
+
+.danger-zone{margin-top:24px;border:1px solid #e8b4b4;background:#fffafa}
+.danger-zone h2{margin:0 0 8px;color:#a61b1b;font-size:1.15rem}
+.danger-zone p{margin:0 0 14px;color:#5b3434}
 </style>
 </head>
 <body>
@@ -46,7 +50,7 @@ footer{text-align:center;font-size:13px;color:#4a6656;padding:20px}
 <div class="brand" id="brand"></div>
 <nav id="nav"></nav>
 <a class="lang" id="dv" href="detailed.html" style="text-decoration:none"></a>
-<button class="lang" id="lang" type="button"></button>
+
 </div></header>
 <main id="app"></main>
 <footer id="foot"></footer>
@@ -54,35 +58,33 @@ footer{text-align:center;font-size:13px;color:#4a6656;padding:20px}
 <script>
 // ---- Course data (hours from the training schedule PDF) ----
 const U=[
-{h:40,en:"Communicative English",bn:"যোগাযোগ ইংরেজি",t:["Vocabulary, speaking & public speaking","Client–freelancer communication","Negotiation, feedback & conflict handling","Everyday spoken English situations"]},
-{h:16,en:"Microsoft Word 2016",bn:"মাইক্রোসফট ওয়ার্ড ২০১৬",t:["Interface, editing & formatting","Tables, graphics & page setup","Styles, sections & references","Mail merge, tracking changes & sharing"]},
-{h:16,en:"Microsoft Excel 2016",bn:"মাইক্রোসফট এক্সেল ২০১৬",t:["Worksheets, formulas & functions","Formatting & charts","Lookups, validation & PivotTables","Goal Seek & analytical tools"]},
-{h:8,en:"Microsoft PowerPoint 2016",bn:"মাইক্রোসফট পাওয়ারপয়েন্ট ২০১৬",t:["Slides, text & shapes","Tables, charts & SmartArt","Slide masters, transitions & animations","Action buttons & embedding content"]},
-{h:24,en:"Computer Hardware & Network Troubleshooting",bn:"কম্পিউটার হার্ডওয়্যার ও নেটওয়ার্ক ট্রাবলশুটিং",t:["Operating systems & Windows installation","Hardware & laptop troubleshooting","Printers & networking (TCP/IP)","Safety & operational procedures"]},
-{h:64,en:"Professional Graphic Design",bn:"প্রফেশনাল গ্রাফিক ডিজাইন",t:["Adobe Illustrator CC fundamentals","Logo, brochure, invoice & packaging projects","Adobe Photoshop CC fundamentals","Typing English & Bangla"]},
-{h:64,en:"Web Design / WordPress Development",bn:"ওয়েব ডিজাইন / ওয়ার্ডপ্রেস ডেভেলপমেন্ট",t:["HTML, CSS & JavaScript basics","WordPress install & themes","Posts, loop, sidebar & templates","Full website, domain & hosting"]},
-{h:40,en:"Online Earning / Freelancing Marketplaces",bn:"অনলাইন আর্নিং / ফ্রিল্যান্সিং মার্কেটপ্লেস",t:["Fiverr: gigs & client communication","Upwork: proposals & jobs","Freelancer.com & SEOClerk","Other platforms & local marketing"]},
-{h:256,en:"Digital Marketing for Freelancing",bn:"ফ্রিল্যান্সিংয়ের জন্য ডিজিটাল মার্কেটিং",t:["Niche selection & social media marketing","Facebook, Instagram, X, LinkedIn, Pinterest, Quora, Reddit","Lead generation & email marketing","SEO: on-page, off-page, technical, local","SEM, YouTube SEO, blogging, AdSense & affiliate"]},
-{h:40,en:"Professional Video Editing",bn:"প্রফেশনাল ভিডিও এডিটিং",t:["Adobe Premiere Pro workspace","Clips, keyframes & tools","Audio & titles","Animation, compositing & export"]},
-{h:32,en:"Generic Competency (Soft Skills)",bn:"জেনেরিক কম্পিটেন্সি (সফট স্কিল)",t:["Working in a team","Work values & professionalism","Housekeeping, health & safety","Personal manner in the workplace"]}
+{h:40,en:"Communicative English",t:["Vocabulary, speaking & public speaking","Client–freelancer communication","Negotiation, feedback & conflict handling","Everyday spoken English situations"]},
+{h:16,en:"Microsoft Word 2016",t:["Interface, editing & formatting","Tables, graphics & page setup","Styles, sections & references","Mail merge, tracking changes & sharing"]},
+{h:16,en:"Microsoft Excel 2016",t:["Worksheets, formulas & functions","Formatting & charts","Lookups, validation & PivotTables","Goal Seek & analytical tools"]},
+{h:8,en:"Microsoft PowerPoint 2016",t:["Slides, text & shapes","Tables, charts & SmartArt","Slide masters, transitions & animations","Action buttons & embedding content"]},
+{h:24,en:"Computer Hardware & Network Troubleshooting",t:["Operating systems & Windows installation","Hardware & laptop troubleshooting","Printers & networking (TCP/IP)","Safety & operational procedures"]},
+{h:64,en:"Professional Graphic Design",t:["Adobe Illustrator CC fundamentals","Logo, brochure, invoice & packaging projects","Adobe Photoshop CC fundamentals","Typing English & Bangla"]},
+{h:64,en:"Web Design / WordPress Development",t:["HTML, CSS & JavaScript basics","WordPress install & themes","Posts, loop, sidebar & templates","Full website, domain & hosting"]},
+{h:40,en:"Online Earning / Freelancing Marketplaces",t:["Fiverr: gigs & client communication","Upwork: proposals & jobs","Freelancer.com & SEOClerk","Other platforms & local marketing"]},
+{h:256,en:"Digital Marketing for Freelancing",t:["Niche selection & social media marketing","Facebook, Instagram, X, LinkedIn, Pinterest, Quora, Reddit","Lead generation & email marketing","SEO: on-page, off-page, technical, local","SEM, YouTube SEO, blogging, AdSense & affiliate"]},
+{h:40,en:"Professional Video Editing",t:["Adobe Premiere Pro workspace","Clips, keyframes & tools","Audio & titles","Animation, compositing & export"]},
+{h:32,en:"Generic Competency (Soft Skills)",t:["Working in a team","Work values & professionalism","Housekeeping, health & safety","Personal manner in the workplace"]}
 ];
 const T={
-en:{brand:"Freelancing Course Progress",home:"Home",units:"Units",about:"About",lang:"বাংলা",dv:"Detailed version",overall:"Overall Progress",uDone:"Units completed",hDone:"Hours completed",hLeft:"Hours remaining",next:"Next unit",open:"Open unit",mark:"Mark all topics done",unmark:"Clear all topics",prog:"In progress",done:"Completed",todo:"Not completed",hrs:"hours",unit:"Unit",topics:"Key topics",all:"All units",prev:"Previous",nxt:"Next",reset:"Reset all progress",sure:"Click again to confirm: delete all progress",m0:"Start your first unit today!",m1:"Good start. Keep going, every unit counts.",m2:"More than halfway there!",m3:"Congratulations! You have completed the whole course.",allDone:"All units completed",aboutT:"About this course",aboutP:"Course: Freelancing. Duration: 3 months. Implemented by e-Learning & Earning Ltd. for the Department of Youth Development, Bangladesh. Progress % is weighted by unit hours.",save:"Your progress is saved only in this browser on this device.",of:"of"},
-bn:{brand:"ফ্রিল্যান্সিং কোর্স প্রগ্রেস",home:"হোম",units:"ইউনিট",about:"সম্পর্কে",lang:"English",dv:"বিস্তারিত সংস্করণ",overall:"সামগ্রিক অগ্রগতি",uDone:"সম্পন্ন ইউনিট",hDone:"সম্পন্ন ঘণ্টা",hLeft:"বাকি ঘণ্টা",next:"পরবর্তী ইউনিট",open:"ইউনিট খুলুন",mark:"সব টপিক সম্পন্ন",unmark:"সব টপিক মুছুন",prog:"চলমান",done:"সম্পন্ন",todo:"সম্পন্ন হয়নি",hrs:"ঘণ্টা",unit:"ইউনিট",topics:"মূল বিষয়",all:"সব ইউনিট",prev:"আগের",nxt:"পরের",reset:"সব অগ্রগতি মুছুন",sure:"নিশ্চিত করতে আবার ক্লিক করুন: সব অগ্রগতি মুছে যাবে",m0:"আজই প্রথম ইউনিট শুরু করুন!",m1:"ভালো শুরু! চালিয়ে যান, প্রতিটি ইউনিট গুরুত্বপূর্ণ।",m2:"অর্ধেকের বেশি শেষ!",m3:"অভিনন্দন! আপনি পুরো কোর্স সম্পন্ন করেছেন।",allDone:"সব ইউনিট সম্পন্ন",aboutT:"কোর্স সম্পর্কে",aboutP:"কোর্স: ফ্রিল্যান্সিং। মেয়াদ: ৩ মাস। বাস্তবায়নে: ই-লার্নিং অ্যান্ড আর্নিং লিমিটেড, যুব উন্নয়ন অধিদপ্তরের জন্য। শতকরা অগ্রগতি ইউনিটের ঘণ্টা অনুযায়ী হিসাব করা হয়।",save:"আপনার অগ্রগতি শুধু এই ডিভাইসের এই ব্রাউজারে সংরক্ষিত থাকে।",of:"/"}
+en:{brand:"Freelancing Course Progress",home:"Home",units:"Units",about:"About",lang:"বাংলা",dv:"Detailed version",overall:"Overall Progress",uDone:"Units completed",hDone:"Hours completed",hLeft:"Hours remaining",next:"Next unit",open:"Open unit",mark:"Mark all topics done",unmark:"Clear all topics",prog:"In progress",done:"Completed",todo:"Not completed",hrs:"hours",unit:"Unit",topics:"Key topics",all:"All units",prev:"Previous",nxt:"Next",reset:"Reset all progress",sure:"Click again to confirm: delete all progress",m0:"Start your first unit today!",m1:"Good start. Keep going, every unit counts.",m2:"More than halfway there!",m3:"Congratulations! You have completed the whole course.",allDone:"All units completed",aboutT:"About this course",aboutP:"Course: Freelancing. Duration: 3 months. Implemented by e-Learning & Earning Ltd. for the Department of Youth Development, Bangladesh. Progress % is weighted by unit hours.",save:"Your progress is saved only in this browser on this device.",of:"of"}
 };
 
 // ---- State (browser only) ----
 let S={lang:"en",tp:{}};
-try{const o=JSON.parse(localStorage.getItem("fcp")||"{}");if(o.lang)S.lang=o.lang;if(o.tp)S.tp=o.tp}catch(e){}
+try{const o=JSON.parse(localStorage.getItem("fcp")||"{}");if(o.tp)S.tp=o.tp}catch(e){}
 function save(){try{localStorage.setItem("fcp",JSON.stringify(S))}catch(e){}}
 const L=()=>T[S.lang];
-const n=x=>S.lang==="bn"?String(x).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]):String(x);
-const nm=i=>U[i][S.lang];
+const n=x=>String(x);
+const nm=i=>U[i].en;
 const TOTAL=U.reduce((a,u)=>a+u.h,0);
 const fr=i=>U[i].t.filter((x,j)=>S.tp[i+"-"+j]).length/U[i].t.length;
 const up=i=>Math.round(fr(i)*100);
 function stats(){let c=0,h=0;U.forEach((u,i)=>{if(fr(i)===1)c++;h+=u.h*fr(i)});h=Math.round(h*10)/10;return{c,h,p:Math.round(h/TOTAL*100)}}
-function setLang(){S.lang=S.lang==="en"?"bn":"en";save();render()}
 function tog(k){S.tp[k]=!S.tp[k];save();render()}
 function all(i,v){U[i].t.forEach((x,j)=>{S.tp[i+"-"+j]=v});save();render()}
 let arm=false;
@@ -96,7 +98,7 @@ function home(){
   const ni=U.findIndex((u,i)=>up(i)<100);
   const next=ni<0?`<div class="card ok"><h3>🎉 ${l.allDone}</h3></div>`:`<div class="card"><span class="tag">${l.next}</span><h3>${l.unit} ${n(ni+1)}: ${nm(ni)}</h3><div>${n(U[ni].h)} ${l.hrs} · ${n(up(ni))}%</div><div class="pbar"><i style="width:${up(ni)}%"></i></div><div style="margin-top:12px"><a class="btn" href="#u${ni+1}">${l.open}</a></div></div>`;
   return `<section class="hero"><div class="ring">${ring(s.p)}</div><div><h1>${l.overall}</h1><p>${msg}</p><a class="btn alt" href="#units">${l.units} →</a> <a class="btn" href="detailed.html">${l.dv}</a></div></section>
-  <div class="stats"><div class="stat"><b>${n(s.c)} ${l.of} ${n(U.length)}</b>${l.uDone}</div><div class="stat"><b>${n(s.h)} ${l.of} ${n(TOTAL)}</b>${l.hDone}</div><div class="stat"><b>${n(TOTAL-s.h)}</b>${l.hLeft}</div></div>${next}`;
+  <div class="stats"><div class="stat"><b>${n(s.c)} ${l.of} ${n(U.length)}</b>${l.uDone}</div><div class="stat"><b>${n(s.h)} ${l.of} ${n(TOTAL)}</b>${l.hDone}</div><div class="stat"><b>${n(TOTAL-s.h)}</b>${l.hLeft}</div></div>${next}<section class="card danger-zone"><h2>Danger zone</h2><p>Reset saved progress for this version only.</p><button type="button" class="btn red" data-reset>${arm?l.sure:l.reset}</button></section>`;
 }
 function units(){
   const l=L();
@@ -105,9 +107,9 @@ function units(){
 function unit(i){
   const u=U[i],l=L(),p=up(i);
   return `<a class="more" href="#units">← ${l.all}</a><div class="card ${p===100?"ok":""}" style="margin-top:12px"><span class="tag">${l.unit} ${n(i+1)} · ${n(u.h)} ${l.hrs}</span><h1>${nm(i)}</h1><b>${n(p)}% ${l.done}</b><div class="pbar"><i style="width:${p}%"></i></div><b style="margin-top:10px">${l.topics}</b><ul class="tl">${u.t.map((x,j)=>`<li><label><input class="chk" type="checkbox" data-tog="${i}-${j}" ${S.tp[i+"-"+j]?"checked":""}> ${x}</label></li>`).join("")}</ul><div class="row"><button type="button" class="btn" data-all="${i}" data-v="1">${l.mark}</button><button type="button" class="btn alt" data-all="${i}" data-v="0">${l.unmark}</button></div></div>
-  <div class="nav2">${i>0?`<a class="btn alt" href="#u${i}">← ${l.prev}</a>`:"<span></span>"}${i<U.length-1?`<a class="btn alt" href="#u${i+2}">${l.nxt} →</a>`:`<a class="btn" href="#home">${S.lang==="bn"?"সম্পন্ন":"Done"}</a>`}</div>`;
+  <div class="nav2">${i>0?`<a class="btn alt" href="#u${i}">← ${l.prev}</a>`:"<span></span>"}${i<U.length-1?`<a class="btn alt" href="#u${i+2}">${l.nxt} →</a>`:`<a class="btn" href="#home">Done</a>`}</div>`;
 }
-function about(){const l=L();return `<h1>${l.aboutT}</h1><div class="card"><p>${l.aboutP}</p><p>${l.save}</p><div><button type="button" class="btn red" data-reset>${arm?l.sure:l.reset}</button></div></div>`}
+function about(){const l=L();return `<h1>${l.aboutT}</h1><div class="card"><p>${l.aboutP}</p><p>${l.save}</p></div>`}
 
 // ---- Router ----
 let route=location.hash.slice(1)||"home";
@@ -116,10 +118,9 @@ function render(go){
   let v;
   if(m&&U[m[1]-1])v=unit(m[1]-1);else if(h==="units")v=units();else if(h==="about")v=about();else v=home();
   const cur=m?"units":(h==="units"||h==="about")?h:"home";
-  document.documentElement.lang=S.lang;
+  document.documentElement.lang="en";
   document.title=l.brand;
   document.getElementById("brand").textContent=l.brand;
-  document.getElementById("lang").textContent=l.lang;
   document.getElementById("dv").textContent=l.dv;
   document.getElementById("foot").textContent=l.save;
   document.getElementById("nav").innerHTML=["home","units","about"].map(k=>`<a href="#${k}" class="${cur===k?"on":""}">${l[k]}</a>`).join("");
@@ -137,7 +138,6 @@ document.addEventListener("click",e=>{
   const t=e.target.closest("[data-tog]");
   if(t&&t.tagName!=="INPUT"){tog(t.dataset.tog);return}
   if(e.target.closest("[data-reset]")){resetAll();return}
-  if(e.target.closest("#lang")){setLang()}
 });
 document.addEventListener("change",e=>{const t=e.target.closest("input[data-tog]");if(t)tog(t.dataset.tog)});
 render();
