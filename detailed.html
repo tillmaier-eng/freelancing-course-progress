@@ -108,7 +108,7 @@ function unit(i){
   const u=U[i],l=L(),p=up(i);
   const body=`<b style="margin-top:10px">${l.topics}</b><ul class="tl">${u.t.map((x,j)=>`<li><label><input class="chk" type="checkbox" data-tog="${i}-${j}" ${S.tp[i+"-"+j]?"checked":""}> ${x}</label></li>`).join("")}</ul><div class="row"><button type="button" class="btn" data-all="${i}" data-v="1">${l.mark}</button><button type="button" class="btn alt" data-all="${i}" data-v="0">${l.unmark}</button></div>`;
   return `<a class="more" href="#units">← ${l.all}</a><div style="height:12px"></div><div class="card ${p===100?"ok":""}"><span class="tag">${l.unit} ${n(i+1)} · ${n(u.h)} ${l.hrs}</span><h1>${nm(i)}</h1><b>${n(p)}% ${l.done}</b><div class="pbar"><i style="width:${p}%"></i></div>${body}</div>
-  <div class="nav2">${i>0?`<a class="btn alt" href="#u${i}">← ${l.prev}</a>`:"<span></span>"}${i<U.length-1?`<a class="btn alt" href="#u${i+2}">${l.nxt} →</a>`:""}</div>`;
+  <div class="nav2">${i>0?`<a class="btn alt" href="#u${i}">← ${l.prev}</a>`:"<span></span>"}${i<U.length-1?`<a class="btn alt" href="#u${i+2}">${l.nxt} →</a>`:`<a class="btn" href="#home">${S.lang==="bn"?"সম্পন্ন":"Done"}</a>`}</div>`;
 }
 function report(){
   const l=L(),s=stats();
