@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Freelancing Course Progress</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0e7a3d;--gd:#095c2d;--bg:#e8f1ec;--card:#fff;--line:#cfe0d6;--tx:#12301f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Hind Siliguri",system-ui,Arial,sans-serif;line-height:1.5}
+header{background:var(--g);color:#fff;position:sticky;top:0;z-index:5}
+.bar{max-width:980px;margin:auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.brand{font-weight:700;font-size:18px;margin-right:auto}
+nav a{color:#fff;text-decoration:none;padding:6px 12px;border-radius:20px;font-weight:600}
+nav a.on{background:#fff;color:var(--gd)}
+.lang{border:2px solid #fff;background:none;color:#fff;border-radius:20px;padding:4px 12px;font:inherit;font-weight:600;cursor:pointer}
+main{max-width:980px;margin:auto;padding:20px 16px 50px}
+h1{margin:0 0 6px;font-size:26px;color:var(--gd)}
+.hero,.card,.stat{background:var(--card);border:1px solid var(--line);border-radius:14px}
+.hero{display:flex;align-items:center;gap:24px;padding:22px;flex-wrap:wrap}
+.ring{width:170px;flex:none}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
+.stat{padding:16px}.stat b{display:block;font-size:28px;color:var(--g)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:16px}
+.card{padding:16px;display:flex;flex-direction:column;gap:8px}
+.card.ok{border-color:var(--g);background:#f1faf4}
+.row{display:flex;align-items:center;gap:10px}
+.row h3{margin:0;font-size:17px;flex:1}
+.chk{width:24px;height:24px;accent-color:var(--g);cursor:pointer}
+.tag{font-size:13px;background:var(--bg);padding:2px 10px;border-radius:12px;width:fit-content}
+.ok .tag{background:var(--g);color:#fff}
+.btn{display:inline-block;background:var(--g);color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:600;text-decoration:none;cursor:pointer}
+.btn.alt{background:#fff;color:var(--gd);border:2px solid var(--g)}
+.btn.red{background:#b3261e}
+a.more{color:var(--g);font-weight:600;text-decoration:none}
+ul{padding-left:20px}.tl{list-style:none;padding:0;margin:6px 0 12px}.tl li{padding:6px 0}.tl label{display:flex;gap:10px;align-items:center;cursor:pointer}
+.pbar{height:10px;background:var(--line);border-radius:8px;overflow:hidden;margin-top:10px}
+.pbar i{display:block;height:100%;background:var(--g)}
+.nav2{display:flex;justify-content:space-between;margin-top:20px;gap:10px;flex-wrap:wrap}
+footer{text-align:center;font-size:13px;color:#4a6656;padding:20px}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand" id="brand"></div>
+<nav id="nav"></nav>
+<button class="lang" id="lang" type="button"></button>
+</div></header>
+<main id="app"></main>
+<footer id="foot"></footer>
+
+<script>
+// ---- Course data (hours from the training schedule PDF) ----
+const U=[
+{h:40,en:"Communicative English",bn:"যোগাযোগ ইংরেজি",t:["Vocabulary, speaking & public speaking","Client–freelancer communication","Negotiation, feedback & conflict handling","Everyday spoken English situations"]},
+{h:16,en:"Microsoft Word 2016",bn:"মাইক্রোসফট ওয়ার্ড ২০১৬",t:["Interface, editing & formatting","Tables, graphics & page setup","Styles, sections & references","Mail merge, tracking changes & sharing"]},
+{h:16,en:"Microsoft Excel 2016",bn:"মাইক্রোসফট এক্সেল ২০১৬",t:["Worksheets, formulas & functions","Formatting & charts","Lookups, validation & PivotTables","Goal Seek & analytical tools"]},
+{h:8,en:"Microsoft PowerPoint 2016",bn:"মাইক্রোসফট পাওয়ারপয়েন্ট ২০১৬",t:["Slides, text & shapes","Tables, charts & SmartArt","Slide masters, transitions & animations","Action buttons & embedding content"]},
+{h:24,en:"Computer Hardware & Network Troubleshooting",bn:"কম্পিউটার হার্ডওয়্যার ও নেটওয়ার্ক ট্রাবলশুটিং",t:["Operating systems & Windows installation","Hardware & laptop troubleshooting","Printers & networking (TCP/IP)","Safety & operational procedures"]},
+{h:64,en:"Professional Graphic Design",bn:"প্রফেশনাল গ্রাফিক ডিজাইন",t:["Adobe Illustrator CC fundamentals","Logo, brochure, invoice & packaging projects","Adobe Photoshop CC fundamentals","Typing English & Bangla"]},
+{h:64,en:"Web Design / WordPress Development",bn:"ওয়েব ডিজাইন / ওয়ার্ডপ্রেস ডেভেলপমেন্ট",t:["HTML, CSS & JavaScript basics","WordPress install & themes","Posts, loop, sidebar & templates","Full website, domain & hosting"]},
+{h:40,en:"Online Earning / Freelancing Marketplaces",bn:"অনলাইন আর্নিং / ফ্রিল্যান্সিং মার্কেটপ্লেস",t:["Fiverr: gigs & client communication","Upwork: proposals & jobs","Freelancer.com & SEOClerk","Other platforms & local marketing"]},
+{h:256,en:"Digital Marketing for Freelancing",bn:"ফ্রিল্যান্সিংয়ের জন্য ডিজিটাল মার্কেটিং",t:["Niche selection & social media marketing","Facebook, Instagram, X, LinkedIn, Pinterest, Quora, Reddit","Lead generation & email marketing","SEO: on-page, off-page, technical, local","SEM, YouTube SEO, blogging, AdSense & affiliate"]},
+{h:40,en:"Professional Video Editing",bn:"প্রফেশনাল ভিডিও এডিটিং",t:["Adobe Premiere Pro workspace","Clips, keyframes & tools","Audio & titles","Animation, compositing & export"]},
+{h:32,en:"Generic Competency (Soft Skills)",bn:"জেনেরিক কম্পিটেন্সি (সফট স্কিল)",t:["Working in a team","Work values & professionalism","Housekeeping, health & safety","Personal manner in the workplace"]}
+];
+const T={
+en:{brand:"Freelancing Course Progress",home:"Home",units:"Units",about:"About",lang:"বাংলা",overall:"Overall Progress",uDone:"Units completed",hDone:"Hours completed",hLeft:"Hours remaining",next:"Next unit",open:"Open unit",mark:"Mark all topics done",unmark:"Clear all topics",prog:"In progress",done:"Completed",todo:"Not completed",hrs:"hours",unit:"Unit",topics:"Key topics",all:"All units",prev:"Previous",nxt:"Next",reset:"Reset all progress",sure:"Click again to confirm: delete all progress",m0:"Start your first unit today!",m1:"Good start. Keep going, every unit counts.",m2:"More than halfway there!",m3:"Congratulations! You have completed the whole course.",allDone:"All units completed",aboutT:"About this course",aboutP:"Course: Freelancing. Duration: 3 months. Implemented by e-Learning & Earning Ltd. for the Department of Youth Development, Bangladesh. Progress % is weighted by unit hours.",save:"Your progress is saved only in this browser on this device.",of:"of"},
+bn:{brand:"ফ্রিল্যান্সিং কোর্স প্রগ্রেস",home:"হোম",units:"ইউনিট",about:"সম্পর্কে",lang:"English",overall:"সামগ্রিক অগ্রগতি",uDone:"সম্পন্ন ইউনিট",hDone:"সম্পন্ন ঘণ্টা",hLeft:"বাকি ঘণ্টা",next:"পরবর্তী ইউনিট",open:"ইউনিট খুলুন",mark:"সব টপিক সম্পন্ন",unmark:"সব টপিক মুছুন",prog:"চলমান",done:"সম্পন্ন",todo:"সম্পন্ন হয়নি",hrs:"ঘণ্টা",unit:"ইউনিট",topics:"মূল বিষয়",all:"সব ইউনিট",prev:"আগের",nxt:"পরের",reset:"সব অগ্রগতি মুছুন",sure:"নিশ্চিত করতে আবার ক্লিক করুন: সব অগ্রগতি মুছে যাবে",m0:"আজই প্রথম ইউনিট শুরু করুন!",m1:"ভালো শুরু! চালিয়ে যান, প্রতিটি ইউনিট গুরুত্বপূর্ণ।",m2:"অর্ধেকের বেশি শেষ!",m3:"অভিনন্দন! আপনি পুরো কোর্স সম্পন্ন করেছেন।",allDone:"সব ইউনিট সম্পন্ন",aboutT:"কোর্স সম্পর্কে",aboutP:"কোর্স: ফ্রিল্যান্সিং। মেয়াদ: ৩ মাস। বাস্তবায়নে: ই-লার্নিং অ্যান্ড আর্নিং লিমিটেড, যুব উন্নয়ন অধিদপ্তরের জন্য। শতকরা অগ্রগতি ইউনিটের ঘণ্টা অনুযায়ী হিসাব করা হয়।",save:"আপনার অগ্রগতি শুধু এই ডিভাইসের এই ব্রাউজারে সংরক্ষিত থাকে।",of:"/"}
+};
+
+// ---- State (browser only) ----
+let S={lang:"en",tp:{}};
+try{const o=JSON.parse(localStorage.getItem("fcp")||"{}");if(o.lang)S.lang=o.lang;if(o.tp)S.tp=o.tp}catch(e){}
+function save(){try{localStorage.setItem("fcp",JSON.stringify(S))}catch(e){}}
+const L=()=>T[S.lang];
+const n=x=>S.lang==="bn"?String(x).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]):String(x);
+const nm=i=>U[i][S.lang];
+const TOTAL=U.reduce((a,u)=>a+u.h,0);
+const fr=i=>U[i].t.filter((x,j)=>S.tp[i+"-"+j]).length/U[i].t.length;
+const up=i=>Math.round(fr(i)*100);
+function stats(){let c=0,h=0;U.forEach((u,i)=>{if(fr(i)===1)c++;h+=u.h*fr(i)});h=Math.round(h*10)/10;return{c,h,p:Math.round(h/TOTAL*100)}}
+function setLang(){S.lang=S.lang==="en"?"bn":"en";save();render()}
+function tog(k){S.tp[k]=!S.tp[k];save();render()}
+function all(i,v){U[i].t.forEach((x,j)=>{S.tp[i+"-"+j]=v});save();render()}
+let arm=false;
+function resetAll(){if(!arm){arm=true;render();return}arm=false;S.tp={};save();render()}
+
+// ---- Views ----
+function ring(p){return `<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="none" stroke="#d3e5da" stroke-width="12"/><circle cx="60" cy="60" r="54" fill="none" stroke="#0e7a3d" stroke-width="12" stroke-linecap="round" stroke-dasharray="${p*3.393} 339.3" transform="rotate(-90 60 60)"/><text x="60" y="69" text-anchor="middle" font-size="26" font-weight="700" fill="#095c2d">${n(p)}%</text></svg>`}
+function home(){
+  const s=stats(),l=L();
+  const msg=s.p===100?l.m3:s.p>=50?l.m2:s.p>0?l.m1:l.m0;
+  const ni=U.findIndex((u,i)=>up(i)<100);
+  const next=ni<0?`<div class="card ok"><h3>🎉 ${l.allDone}</h3></div>`:`<div class="card"><span class="tag">${l.next}</span><h3>${l.unit} ${n(ni+1)}: ${nm(ni)}</h3><div>${n(U[ni].h)} ${l.hrs} · ${n(up(ni))}%</div><div class="pbar"><i style="width:${up(ni)}%"></i></div><div style="margin-top:12px"><a class="btn" href="#u${ni+1}">${l.open}</a></div></div>`;
+  return `<section class="hero"><div class="ring">${ring(s.p)}</div><div><h1>${l.overall}</h1><p>${msg}</p><a class="btn alt" href="#units">${l.units} →</a></div></section>
+  <div class="stats"><div class="stat"><b>${n(s.c)} ${l.of} ${n(U.length)}</b>${l.uDone}</div><div class="stat"><b>${n(s.h)} ${l.of} ${n(TOTAL)}</b>${l.hDone}</div><div class="stat"><b>${n(TOTAL-s.h)}</b>${l.hLeft}</div></div>${next}`;
+}
+function units(){
+  const l=L();
+  return `<h1>${l.units}</h1><div class="grid">`+U.map((u,i)=>{const p=up(i);return `<div class="card ${p===100?"ok":""}"><h3>${n(i+1)}. ${nm(i)}</h3><div>${n(u.h)} ${l.hrs}</div><div class="pbar"><i style="width:${p}%"></i></div><span class="tag">${p===100?l.done:p>0?l.prog+" · "+n(p)+"%":l.todo}</span><a class="more" href="#u${i+1}">${l.open} →</a></div>`}).join("")+`</div>`;
+}
+function unit(i){
+  const u=U[i],l=L(),p=up(i);
+  return `<a class="more" href="#units">← ${l.all}</a><div class="card ${p===100?"ok":""}" style="margin-top:12px"><span class="tag">${l.unit} ${n(i+1)} · ${n(u.h)} ${l.hrs}</span><h1>${nm(i)}</h1><b>${n(p)}% ${l.done}</b><div class="pbar"><i style="width:${p}%"></i></div><b style="margin-top:10px">${l.topics}</b><ul class="tl">${u.t.map((x,j)=>`<li><label><input class="chk" type="checkbox" data-tog="${i}-${j}" ${S.tp[i+"-"+j]?"checked":""}> ${x}</label></li>`).join("")}</ul><div class="row"><button type="button" class="btn" data-all="${i}" data-v="1">${l.mark}</button><button type="button" class="btn alt" data-all="${i}" data-v="0">${l.unmark}</button></div></div>
+  <div class="nav2">${i>0?`<a class="btn alt" href="#u${i}">← ${l.prev}</a>`:"<span></span>"}${i<U.length-1?`<a class="btn alt" href="#u${i+2}">${l.nxt} →</a>`:""}</div>`;
+}
+function about(){const l=L();return `<h1>${l.aboutT}</h1><div class="card"><p>${l.aboutP}</p><p>${l.save}</p><div><button type="button" class="btn red" data-reset>${arm?l.sure:l.reset}</button></div></div>`}
+
+// ---- Router ----
+let route=location.hash.slice(1)||"home";
+function render(go){
+  const h=route,l=L(),m=h.match(/^u(\d+)$/);
+  let v;
+  if(m&&U[m[1]-1])v=unit(m[1]-1);else if(h==="units")v=units();else if(h==="about")v=about();else v=home();
+  const cur=m?"units":(h==="units"||h==="about")?h:"home";
+  document.documentElement.lang=S.lang;
+  document.title=l.brand;
+  document.getElementById("brand").textContent=l.brand;
+  document.getElementById("lang").textContent=l.lang;
+  document.getElementById("foot").textContent=l.save;
+  document.getElementById("nav").innerHTML=["home","units","about"].map(k=>`<a href="#${k}" class="${cur===k?"on":""}">${l[k]}</a>`).join("");
+  document.getElementById("app").innerHTML=v;
+  if(go)window.scrollTo(0,0);
+}
+function sync(){route=location.hash.slice(1)||"home";arm=false;render(true)}
+window.addEventListener("hashchange",sync);
+window.addEventListener("popstate",sync);
+document.addEventListener("click",e=>{
+  const a=e.target.closest("a[href^='#']");
+  if(a){e.preventDefault();route=a.getAttribute("href").slice(1)||"home";arm=false;try{history.pushState(null,"","#"+route)}catch(x){}render(true);return}
+  const A=e.target.closest("[data-all]");
+  if(A){all(+A.dataset.all,A.dataset.v==="1");return}
+  const t=e.target.closest("[data-tog]");
+  if(t&&t.tagName!=="INPUT"){tog(t.dataset.tog);return}
+  if(e.target.closest("[data-reset]")){resetAll();return}
+  if(e.target.closest("#lang")){setLang()}
+});
+document.addEventListener("change",e=>{const t=e.target.closest("input[data-tog]");if(t)tog(t.dataset.tog)});
+render();
+</script>
+</body>
+</html>
