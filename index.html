@@ -45,6 +45,7 @@ footer{text-align:center;font-size:13px;color:#4a6656;padding:20px}
 <header><div class="bar">
 <div class="brand" id="brand"></div>
 <nav id="nav"></nav>
+<a class="lang" id="dv" href="detailed.html" style="text-decoration:none"></a>
 <button class="lang" id="lang" type="button"></button>
 </div></header>
 <main id="app"></main>
@@ -66,8 +67,8 @@ const U=[
 {h:32,en:"Generic Competency (Soft Skills)",bn:"জেনেরিক কম্পিটেন্সি (সফট স্কিল)",t:["Working in a team","Work values & professionalism","Housekeeping, health & safety","Personal manner in the workplace"]}
 ];
 const T={
-en:{brand:"Freelancing Course Progress",home:"Home",units:"Units",about:"About",lang:"বাংলা",overall:"Overall Progress",uDone:"Units completed",hDone:"Hours completed",hLeft:"Hours remaining",next:"Next unit",open:"Open unit",mark:"Mark all topics done",unmark:"Clear all topics",prog:"In progress",done:"Completed",todo:"Not completed",hrs:"hours",unit:"Unit",topics:"Key topics",all:"All units",prev:"Previous",nxt:"Next",reset:"Reset all progress",sure:"Click again to confirm: delete all progress",m0:"Start your first unit today!",m1:"Good start. Keep going, every unit counts.",m2:"More than halfway there!",m3:"Congratulations! You have completed the whole course.",allDone:"All units completed",aboutT:"About this course",aboutP:"Course: Freelancing. Duration: 3 months. Implemented by e-Learning & Earning Ltd. for the Department of Youth Development, Bangladesh. Progress % is weighted by unit hours.",save:"Your progress is saved only in this browser on this device.",of:"of"},
-bn:{brand:"ফ্রিল্যান্সিং কোর্স প্রগ্রেস",home:"হোম",units:"ইউনিট",about:"সম্পর্কে",lang:"English",overall:"সামগ্রিক অগ্রগতি",uDone:"সম্পন্ন ইউনিট",hDone:"সম্পন্ন ঘণ্টা",hLeft:"বাকি ঘণ্টা",next:"পরবর্তী ইউনিট",open:"ইউনিট খুলুন",mark:"সব টপিক সম্পন্ন",unmark:"সব টপিক মুছুন",prog:"চলমান",done:"সম্পন্ন",todo:"সম্পন্ন হয়নি",hrs:"ঘণ্টা",unit:"ইউনিট",topics:"মূল বিষয়",all:"সব ইউনিট",prev:"আগের",nxt:"পরের",reset:"সব অগ্রগতি মুছুন",sure:"নিশ্চিত করতে আবার ক্লিক করুন: সব অগ্রগতি মুছে যাবে",m0:"আজই প্রথম ইউনিট শুরু করুন!",m1:"ভালো শুরু! চালিয়ে যান, প্রতিটি ইউনিট গুরুত্বপূর্ণ।",m2:"অর্ধেকের বেশি শেষ!",m3:"অভিনন্দন! আপনি পুরো কোর্স সম্পন্ন করেছেন।",allDone:"সব ইউনিট সম্পন্ন",aboutT:"কোর্স সম্পর্কে",aboutP:"কোর্স: ফ্রিল্যান্সিং। মেয়াদ: ৩ মাস। বাস্তবায়নে: ই-লার্নিং অ্যান্ড আর্নিং লিমিটেড, যুব উন্নয়ন অধিদপ্তরের জন্য। শতকরা অগ্রগতি ইউনিটের ঘণ্টা অনুযায়ী হিসাব করা হয়।",save:"আপনার অগ্রগতি শুধু এই ডিভাইসের এই ব্রাউজারে সংরক্ষিত থাকে।",of:"/"}
+en:{brand:"Freelancing Course Progress",home:"Home",units:"Units",about:"About",lang:"বাংলা",dv:"Detailed version",overall:"Overall Progress",uDone:"Units completed",hDone:"Hours completed",hLeft:"Hours remaining",next:"Next unit",open:"Open unit",mark:"Mark all topics done",unmark:"Clear all topics",prog:"In progress",done:"Completed",todo:"Not completed",hrs:"hours",unit:"Unit",topics:"Key topics",all:"All units",prev:"Previous",nxt:"Next",reset:"Reset all progress",sure:"Click again to confirm: delete all progress",m0:"Start your first unit today!",m1:"Good start. Keep going, every unit counts.",m2:"More than halfway there!",m3:"Congratulations! You have completed the whole course.",allDone:"All units completed",aboutT:"About this course",aboutP:"Course: Freelancing. Duration: 3 months. Implemented by e-Learning & Earning Ltd. for the Department of Youth Development, Bangladesh. Progress % is weighted by unit hours.",save:"Your progress is saved only in this browser on this device.",of:"of"},
+bn:{brand:"ফ্রিল্যান্সিং কোর্স প্রগ্রেস",home:"হোম",units:"ইউনিট",about:"সম্পর্কে",lang:"English",dv:"বিস্তারিত সংস্করণ",overall:"সামগ্রিক অগ্রগতি",uDone:"সম্পন্ন ইউনিট",hDone:"সম্পন্ন ঘণ্টা",hLeft:"বাকি ঘণ্টা",next:"পরবর্তী ইউনিট",open:"ইউনিট খুলুন",mark:"সব টপিক সম্পন্ন",unmark:"সব টপিক মুছুন",prog:"চলমান",done:"সম্পন্ন",todo:"সম্পন্ন হয়নি",hrs:"ঘণ্টা",unit:"ইউনিট",topics:"মূল বিষয়",all:"সব ইউনিট",prev:"আগের",nxt:"পরের",reset:"সব অগ্রগতি মুছুন",sure:"নিশ্চিত করতে আবার ক্লিক করুন: সব অগ্রগতি মুছে যাবে",m0:"আজই প্রথম ইউনিট শুরু করুন!",m1:"ভালো শুরু! চালিয়ে যান, প্রতিটি ইউনিট গুরুত্বপূর্ণ।",m2:"অর্ধেকের বেশি শেষ!",m3:"অভিনন্দন! আপনি পুরো কোর্স সম্পন্ন করেছেন।",allDone:"সব ইউনিট সম্পন্ন",aboutT:"কোর্স সম্পর্কে",aboutP:"কোর্স: ফ্রিল্যান্সিং। মেয়াদ: ৩ মাস। বাস্তবায়নে: ই-লার্নিং অ্যান্ড আর্নিং লিমিটেড, যুব উন্নয়ন অধিদপ্তরের জন্য। শতকরা অগ্রগতি ইউনিটের ঘণ্টা অনুযায়ী হিসাব করা হয়।",save:"আপনার অগ্রগতি শুধু এই ডিভাইসের এই ব্রাউজারে সংরক্ষিত থাকে।",of:"/"}
 };
 
 // ---- State (browser only) ----
@@ -94,7 +95,7 @@ function home(){
   const msg=s.p===100?l.m3:s.p>=50?l.m2:s.p>0?l.m1:l.m0;
   const ni=U.findIndex((u,i)=>up(i)<100);
   const next=ni<0?`<div class="card ok"><h3>🎉 ${l.allDone}</h3></div>`:`<div class="card"><span class="tag">${l.next}</span><h3>${l.unit} ${n(ni+1)}: ${nm(ni)}</h3><div>${n(U[ni].h)} ${l.hrs} · ${n(up(ni))}%</div><div class="pbar"><i style="width:${up(ni)}%"></i></div><div style="margin-top:12px"><a class="btn" href="#u${ni+1}">${l.open}</a></div></div>`;
-  return `<section class="hero"><div class="ring">${ring(s.p)}</div><div><h1>${l.overall}</h1><p>${msg}</p><a class="btn alt" href="#units">${l.units} →</a></div></section>
+  return `<section class="hero"><div class="ring">${ring(s.p)}</div><div><h1>${l.overall}</h1><p>${msg}</p><a class="btn alt" href="#units">${l.units} →</a> <a class="btn" href="detailed.html">${l.dv}</a></div></section>
   <div class="stats"><div class="stat"><b>${n(s.c)} ${l.of} ${n(U.length)}</b>${l.uDone}</div><div class="stat"><b>${n(s.h)} ${l.of} ${n(TOTAL)}</b>${l.hDone}</div><div class="stat"><b>${n(TOTAL-s.h)}</b>${l.hLeft}</div></div>${next}`;
 }
 function units(){
@@ -119,6 +120,7 @@ function render(go){
   document.title=l.brand;
   document.getElementById("brand").textContent=l.brand;
   document.getElementById("lang").textContent=l.lang;
+  document.getElementById("dv").textContent=l.dv;
   document.getElementById("foot").textContent=l.save;
   document.getElementById("nav").innerHTML=["home","units","about"].map(k=>`<a href="#${k}" class="${cur===k?"on":""}">${l[k]}</a>`).join("");
   document.getElementById("app").innerHTML=v;
